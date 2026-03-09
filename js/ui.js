@@ -8,11 +8,16 @@ import {
 import { buscarProdutoPorId } from "./products.js";
 import { limparCarrinho } from "./cart.js";
 
-export function renderizarProdutos() {
+export function renderizarProdutos(lista = produtos) {
   const listaDosProdutos = document.querySelector("#lista-produtos");
   listaDosProdutos.innerHTML = "";
 
-  produtos.forEach((produto) => {
+  if (lista.length === 0) {
+  listaDosProdutos.innerHTML = "<p>Nenhum produto encontrado.</p>";
+  return;
+}
+
+  lista.forEach((produto) => {
     const container = document.createElement("div");
 
     const nome = document.createElement("h3");
