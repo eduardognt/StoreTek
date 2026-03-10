@@ -1,44 +1,62 @@
 import { carregarCarrinho } from "./storage.js";
 import { recalcularEstoque, limparCarrinho } from "./cart.js";
-import { atualizarUI, renderizarProdutos } from "./ui.js";
+import { renderizarProdutos, renderizarCarrinho } from "./ui.js";
 import { buscarProdutos, filtrarPorCategoria } from "./filters.js";
 import { produtos } from "./data.js";
 
+// Estado dos filtros
 const filtros = {
   busca: "",
-  categoria: "todas"
+  categoria: "todas",
 };
 
+// Aplica os filtros de busca e categoria sobre a lista de produtos
 function aplicarFiltros() {
   let lista = produtos;
-
   lista = buscarProdutos(lista, filtros.busca);
   lista = filtrarPorCategoria(lista, filtros.categoria);
-
   return lista;
 }
 
+// Função que atualiza toda a UI (produtos filtrados + carrinho)
+export function atualizarUI() {
+  const listaFiltrada = aplicarFiltros();
+  renderizarProdutos(listaFiltrada);
+  renderizarCarrinho();
+}
+
+// Inicialização do app
 document.addEventListener("DOMContentLoaded", () => {
   carregarCarrinho();
   recalcularEstoque();
+  atualizarUI();
 
   const searchInput = document.querySelector("#search-input");
   const select = document.querySelector("#filtro-categoria");
+  const btnLimparCarrinho = document.getElementById("limpar-carrinho");
 
-  renderizarProdutos(aplicarFiltros());
-
+  // Busca em tempo real
   searchInput.addEventListener("input", () => {
     filtros.busca = searchInput.value;
-    renderizarProdutos(aplicarFiltros());
-  });
-
-  select.addEventListener("change", () => {
-    filtros.categoria = select.value;
-    renderizarProdutos(aplicarFiltros());
-  });
-
-  document.getElementById("limpar-carrinho").addEventListener("click", () => {
-    limparCarrinho();
     atualizarUI();
   });
+
+  // Filtro por categoria
+  select.addEventListener("change", () => {
+    filtros.categoria = select.value;
+    atualizarUI();
+  });
+
+  // Limpar carrinho
+  if (btnLimparCarrinho) {
+    btnLimparCarrinho.addEventListener("click", () => {
+      limparCarrinho();
+      atualizarUI();
+    });
+  }
+});
+
+// Evento customizado disparado pelo UI.js quando carrinho muda
+document.addEventListener("estadoAtualizado", () => {
+  atualizarUI();
 });

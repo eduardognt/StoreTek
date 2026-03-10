@@ -3,10 +3,11 @@ import {
   adicionarProdutoNoCarrinho,
   removerDoCarrinho,
   calcularTotal,
+  limparCarrinho,
 } from "./cart.js";
 import { buscarProdutoPorId } from "./products.js";
-import { limparCarrinho } from "./cart.js";
 
+// Renderiza a lista de produtos (recebe a lista filtrada do app.js)
 export function renderizarProdutos(lista) {
   const listaDosProdutos = document.querySelector("#lista-produtos");
   listaDosProdutos.innerHTML = "";
@@ -25,21 +26,21 @@ export function renderizarProdutos(lista) {
     const preco = document.createElement("p");
     preco.textContent = `R$ ${produto.preco}`;
 
-    const botao = document.createElement("button");
+    const estoque = document.createElement("p");
+    estoque.textContent = `Estoque: ${produto.estoque}`;
 
+    const botao = document.createElement("button");
     if (produto.estoque > 0) {
       botao.textContent = "Adicionar ao carrinho";
     } else {
       botao.disabled = true;
-      botao.textContent = "Produto indisponivel";
+      botao.textContent = "Produto indisponível";
     }
 
-    const estoque = document.createElement("p");
-    estoque.textContent = `Estoque: ${produto.estoque}`;
-
+    // Ao clicar, adiciona produto e dispara evento global
     botao.addEventListener("click", () => {
       adicionarProdutoNoCarrinho(produto.id);
-      atualizarUI(lista);
+      document.dispatchEvent(new Event("estadoAtualizado"));
     });
 
     container.appendChild(nome);
@@ -51,12 +52,14 @@ export function renderizarProdutos(lista) {
   });
 }
 
+// Renderiza o carrinho
 export function renderizarCarrinho() {
   const listaDoCarrinho = document.querySelector("#lista-carrinho");
   listaDoCarrinho.innerHTML = "";
 
   carrinho.forEach((item) => {
     const produto = buscarProdutoPorId(item.id);
+    if (!produto) return;
 
     const containerCarrinho = document.createElement("div");
 
@@ -67,35 +70,26 @@ export function renderizarCarrinho() {
     quantidade.textContent = `Quantidade: ${item.quantidade}`;
 
     const preco = document.createElement("p");
-    preco.textContent = `Subtotal: ${(
-      produto.preco * item.quantidade
-    ).toLocaleString("pt-BR", {
+    preco.textContent = `Subtotal: ${(produto.preco * item.quantidade).toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
     })}`;
 
+    // Botão de remover/menos
     const botao = document.createElement("button");
-    botao.textContent = "-";
-
-    if (item.quantidade === 1) {
-      botao.textContent = "Remover Item";
-    }
-
+    botao.textContent = item.quantidade === 1 ? "Remover Item" : "-";
     botao.addEventListener("click", () => {
       removerDoCarrinho(item.id);
-      atualizarUI();
+      document.dispatchEvent(new Event("estadoAtualizado"));
     });
 
+    // Botão de adicionar/mais
     const botaoAdd = document.createElement("button");
     botaoAdd.textContent = "+";
-
-    if (produto.estoque <= 0) {
-      botaoAdd.disabled = true;
-    }
-
+    if (produto.estoque <= 0) botaoAdd.disabled = true;
     botaoAdd.addEventListener("click", () => {
       adicionarProdutoNoCarrinho(item.id);
-      atualizarUI();
+      document.dispatchEvent(new Event("estadoAtualizado"));
     });
 
     containerCarrinho.appendChild(nome);
@@ -107,31 +101,24 @@ export function renderizarCarrinho() {
     listaDoCarrinho.appendChild(containerCarrinho);
   });
 
+  // Botão limpar carrinho dentro do carrinho
   if (carrinho.length > 0) {
     const botaoLimpar = document.createElement("button");
     botaoLimpar.classList.add("limpar-carrinho");
     botaoLimpar.textContent = "Limpar carrinho";
-
     botaoLimpar.addEventListener("click", () => {
       limparCarrinho();
-      atualizarUI();
+      document.dispatchEvent(new Event("estadoAtualizado"));
     });
-
     listaDoCarrinho.appendChild(botaoLimpar);
   }
 
-  document.querySelector("#total").textContent = calcularTotal().toLocaleString(
-    "pt-BR",
-    {
+  // Atualiza total
+  const totalEl = document.querySelector("#total");
+  if (totalEl) {
+    totalEl.textContent = calcularTotal().toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
-    }
-  );
-}
-
-export function atualizarUI(lista) {
-  if (lista) {
-    renderizarProdutos(lista);
+    });
   }
-  renderizarCarrinho();
 }
