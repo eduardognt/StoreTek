@@ -1,20 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>StoreTek</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>StoreTek</h1>
 
     <div class="search-container">
-        <input 
-        type="text" 
-        id="search-input"
-        placeholder="Buscar produto..."
-        />
+      <input type="text" id="search-input" placeholder="Buscar produto..." />
+
+      <select id="filtro-categoria">
+        <option value="todas">Todas</option>
+        <option value="hardware">Hardware</option>
+        <option value="eletronico">Eletronico</option>
+        <option value="periferico">Periferico</option>
+      </select>
     </div>
 
     <h2>Produtos</h2>
@@ -25,7 +28,6 @@
 
     <h3>Total: <span id="total">0</span></h3>
 
-    
     <script type="module" src="js/app.js"></script>
-</body>
+  </body>
 </html>

@@ -1,12 +1,21 @@
 import { produtos } from "./data.js";
+import { renderizarProdutos } from "./ui.js";
 
-export function buscarProdutos(texto) {
+export function buscarProdutos(lista, texto) {
 
     const termo = texto.toLowerCase().trim();
 
-    return produtos.filter(produto => 
-        produto.nome?.toLowerCase().includes(termo)
-    );
+    return lista.filter(produto => 
+        produto.nome.toLowerCase().includes(termo)
+    );   
+}
 
+export function filtrarPorCategoria(lista, categoria) {
     
+    if (categoria === "todas") {
+        return lista;
+    }
+     return lista.filter(produto => 
+       categoria === produto.categoria
+    )
 }

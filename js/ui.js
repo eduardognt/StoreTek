@@ -1,4 +1,3 @@
-import { produtos } from "./data.js";
 import { carrinho } from "./state.js";
 import {
   adicionarProdutoNoCarrinho,
@@ -8,14 +7,14 @@ import {
 import { buscarProdutoPorId } from "./products.js";
 import { limparCarrinho } from "./cart.js";
 
-export function renderizarProdutos(lista = produtos) {
+export function renderizarProdutos(lista) {
   const listaDosProdutos = document.querySelector("#lista-produtos");
   listaDosProdutos.innerHTML = "";
 
   if (lista.length === 0) {
-  listaDosProdutos.innerHTML = "<p>Nenhum produto encontrado.</p>";
-  return;
-}
+    listaDosProdutos.innerHTML = "<p>Nenhum produto encontrado.</p>";
+    return;
+  }
 
   lista.forEach((produto) => {
     const container = document.createElement("div");
@@ -40,7 +39,6 @@ export function renderizarProdutos(lista = produtos) {
 
     botao.addEventListener("click", () => {
       adicionarProdutoNoCarrinho(produto.id);
-      atualizarUI();
     });
 
     container.appendChild(nome);
@@ -84,7 +82,6 @@ export function renderizarCarrinho() {
 
     botao.addEventListener("click", () => {
       removerDoCarrinho(item.id);
-      atualizarUI();
     });
 
     const botaoAdd = document.createElement("button");
@@ -96,7 +93,6 @@ export function renderizarCarrinho() {
 
     botaoAdd.addEventListener("click", () => {
       adicionarProdutoNoCarrinho(item.id);
-      atualizarUI();
     });
 
     containerCarrinho.appendChild(nome);
@@ -115,7 +111,6 @@ export function renderizarCarrinho() {
 
     botaoLimpar.addEventListener("click", () => {
       limparCarrinho();
-      atualizarUI();
     });
 
     listaDoCarrinho.appendChild(botaoLimpar);
@@ -126,11 +121,11 @@ export function renderizarCarrinho() {
     {
       style: "currency",
       currency: "BRL",
-    },
+    }
   );
 }
 
-export function atualizarUI() {
-  renderizarProdutos();
+export function atualizarUI(lista) {
+  renderizarProdutos(lista);
   renderizarCarrinho();
 }
