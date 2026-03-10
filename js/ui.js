@@ -11,7 +11,7 @@ export function renderizarProdutos(lista) {
   const listaDosProdutos = document.querySelector("#lista-produtos");
   listaDosProdutos.innerHTML = "";
 
-  if (lista.length === 0) {
+  if (!lista || lista.length === 0) {
     listaDosProdutos.innerHTML = "<p>Nenhum produto encontrado.</p>";
     return;
   }
@@ -39,6 +39,7 @@ export function renderizarProdutos(lista) {
 
     botao.addEventListener("click", () => {
       adicionarProdutoNoCarrinho(produto.id);
+      atualizarUI(lista);
     });
 
     container.appendChild(nome);
@@ -82,6 +83,7 @@ export function renderizarCarrinho() {
 
     botao.addEventListener("click", () => {
       removerDoCarrinho(item.id);
+      atualizarUI();
     });
 
     const botaoAdd = document.createElement("button");
@@ -93,6 +95,7 @@ export function renderizarCarrinho() {
 
     botaoAdd.addEventListener("click", () => {
       adicionarProdutoNoCarrinho(item.id);
+      atualizarUI();
     });
 
     containerCarrinho.appendChild(nome);
@@ -111,6 +114,7 @@ export function renderizarCarrinho() {
 
     botaoLimpar.addEventListener("click", () => {
       limparCarrinho();
+      atualizarUI();
     });
 
     listaDoCarrinho.appendChild(botaoLimpar);
@@ -126,6 +130,8 @@ export function renderizarCarrinho() {
 }
 
 export function atualizarUI(lista) {
-  renderizarProdutos(lista);
+  if (lista) {
+    renderizarProdutos(lista);
+  }
   renderizarCarrinho();
 }
