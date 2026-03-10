@@ -7,12 +7,23 @@ const estoque = document.getElementById("modal-estoque");
 const categoria = document.getElementById("modal-categoria");
 
 const btnFechar = document.getElementById("fechar-modal");
+const btnAddCartModal = document.getElementById("modal-add-carrinho");
 
 export function abrirModal(produto) {
+  produtoAtual = produto;
+
   nome.textContent = produto.nome;
   preco.textContent = `Preço: R$ ${produto.preco}`;
   estoque.textContent = `Estoque: ${produto.estoque}`;
   categoria.textContent = `Categoria: ${produto.categoria}`;
+
+  if (produto.estoque <= 0) {
+    btnAddCartModal.disabled = true;
+    btnAddCartModal.textContent = "Produto indisponível";
+  } else {
+    btnAddCartModal.disabled = false;
+    btnAddCartModal.textContent = "Adicionar ao carrinho";
+  }
 
   modal.classList.remove("hidden");
 }
@@ -20,6 +31,18 @@ export function abrirModal(produto) {
 export function fecharModal() {
   modal.classList.add("hidden");
 }
+
+let produtoAtual = null;
+
+btnAddCartModal.addEventListener("click", () => {
+  if (!produtoAtual) return;
+
+  adicionarProdutoNoCarrinho(produtoAtual.id);
+
+  document.dispatchEvent(new Event("estadoAtualizado"));
+
+  fecharModal();
+});
 
 btnFechar.addEventListener("click", fecharModal);
 
