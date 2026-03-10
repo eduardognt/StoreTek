@@ -6,6 +6,7 @@ import {
   limparCarrinho,
 } from "./cart.js";
 import { buscarProdutoPorId } from "./products.js";
+import { abrirModal } from "./modal.js";
 
 // Renderiza a lista de produtos (recebe a lista filtrada do app.js)
 export function renderizarProdutos(lista) {
@@ -19,6 +20,7 @@ export function renderizarProdutos(lista) {
 
   lista.forEach((produto) => {
     const container = document.createElement("div");
+    container.classList.add("containerProdutos");
 
     const nome = document.createElement("h3");
     nome.textContent = produto.nome;
@@ -30,12 +32,21 @@ export function renderizarProdutos(lista) {
     estoque.textContent = `Estoque: ${produto.estoque}`;
 
     const botao = document.createElement("button");
+    botao.classList.add("btnsCart");
     if (produto.estoque > 0) {
       botao.textContent = "Adicionar ao carrinho";
     } else {
       botao.disabled = true;
       botao.textContent = "Produto indisponível";
     }
+
+    const btnModal = document.createElement("button");
+    btnModal.textContent = "Detalhes";
+    btnModal.classList.add("btnsCart")
+
+    container.addEventListener("click", () => {
+      abrirModal(produto);
+    });
 
     // Ao clicar, adiciona produto e dispara evento global
     botao.addEventListener("click", () => {
@@ -47,6 +58,7 @@ export function renderizarProdutos(lista) {
     container.appendChild(preco);
     container.appendChild(estoque);
     container.appendChild(botao);
+    container.appendChild(btnModal);
 
     listaDosProdutos.appendChild(container);
   });
@@ -62,6 +74,7 @@ export function renderizarCarrinho() {
     if (!produto) return;
 
     const containerCarrinho = document.createElement("div");
+    containerCarrinho.classList.add("containerCarrinho");
 
     const nome = document.createElement("h3");
     nome.textContent = produto.nome;
@@ -70,7 +83,9 @@ export function renderizarCarrinho() {
     quantidade.textContent = `Quantidade: ${item.quantidade}`;
 
     const preco = document.createElement("p");
-    preco.textContent = `Subtotal: ${(produto.preco * item.quantidade).toLocaleString("pt-BR", {
+    preco.textContent = `Subtotal: ${(
+      produto.preco * item.quantidade
+    ).toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
     })}`;
@@ -78,6 +93,10 @@ export function renderizarCarrinho() {
     // Botão de remover/menos
     const botao = document.createElement("button");
     botao.textContent = item.quantidade === 1 ? "Remover Item" : "-";
+    item.quantidade === 1
+      ? (botao.style.backgroundColor = botao.classList.add("dangerColor"))
+      : " - ";
+    botao.classList.add("btnsCart");
     botao.addEventListener("click", () => {
       removerDoCarrinho(item.id);
       document.dispatchEvent(new Event("estadoAtualizado"));
@@ -86,6 +105,7 @@ export function renderizarCarrinho() {
     // Botão de adicionar/mais
     const botaoAdd = document.createElement("button");
     botaoAdd.textContent = "+";
+    botaoAdd.classList.add("btnsCart");
     if (produto.estoque <= 0) botaoAdd.disabled = true;
     botaoAdd.addEventListener("click", () => {
       adicionarProdutoNoCarrinho(item.id);
@@ -104,7 +124,7 @@ export function renderizarCarrinho() {
   // Botão limpar carrinho dentro do carrinho
   if (carrinho.length > 0) {
     const botaoLimpar = document.createElement("button");
-    botaoLimpar.classList.add("limpar-carrinho");
+    botaoLimpar.classList.add("limpar-carrinho", "dangerColor");
     botaoLimpar.textContent = "Limpar carrinho";
     botaoLimpar.addEventListener("click", () => {
       limparCarrinho();

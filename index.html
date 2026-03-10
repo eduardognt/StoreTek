@@ -4,27 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <title>StoreTek</title>
   </head>
   <body>
-    <h1>StoreTek</h1>
+    
+      
+    <header>
+      <h1 id="logo">StoreTek</h1>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Buscar produto..." />
 
-    <div class="search-container">
-      <input type="text" id="search-input" placeholder="Buscar produto..." />
-
-      <select id="filtro-categoria">
-        <option value="todas">Todas</option>
-        <option value="hardware">Hardware</option>
-        <option value="eletronico">Eletronico</option>
-        <option value="periferico">Periferico</option>
-      </select>
-    </div>
+        <select id="filtro-categoria">
+          <option value="todas">Todas</option>
+          <option value="hardware">Hardware</option>
+          <option value="eletronico">Eletronico</option>
+          <option value="periferico">Periferico</option>
+        </select>
+      </div>
+    </header>
 
     <h2>Produtos</h2>
-    <div id="lista-produtos"></div>
+    <div id="lista-produtos">
+      
+    </div>
 
     <h2>Carrinho</h2>
     <div id="lista-carrinho"></div>
+
+    <div id="modal-produto" class="modal hidden">
+      <div class="modal-content">
+        <span id="fechar-modal" class="close">&times;</span>
+        <h3 id="modal-nome"></h3>
+        <p id="modal-preco"></p>
+        <p id="modal-estoque"></p>
+        <p id="modal-categoria"></p>
+        <button id="modal-add-carrinho">Adicionar ao carrinho</button>
+      </div>
+    </div>
 
     <h3>Total: <span id="total">0</span></h3>
 
