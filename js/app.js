@@ -3,6 +3,7 @@ import { recalcularEstoque, limparCarrinho } from "./cart.js";
 import { renderizarProdutos, renderizarCarrinho } from "./ui.js";
 import { buscarProdutos, filtrarPorCategoria } from "./filters.js";
 import { produtos } from "./data.js";
+import { finalizarCompra } from "./cart.js";
 
 // Estado dos filtros
 const filtros = {
@@ -60,3 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("estadoAtualizado", () => {
   atualizarUI();
 });
+
+const btnFinalizar = document.getElementById("btnFinalizar");
+
+btnFinalizar.addEventListener("click", finalizarCompra)

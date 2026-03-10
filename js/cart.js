@@ -13,7 +13,7 @@ export function adicionarProdutoNoCarrinho(produtoId) {
 
   if (itemExiste) {
     novoCarrinho = carrinho.map((p) =>
-      p.id === produtoId ? { ...p, quantidade: p.quantidade + 1 } : p
+      p.id === produtoId ? { ...p, quantidade: p.quantidade + 1 } : p,
     );
   } else {
     novoCarrinho = [...carrinho, { id: produtoId, quantidade: 1 }];
@@ -30,7 +30,9 @@ export function removerDoCarrinho(produtoId) {
   produto.estoque++;
 
   const novoCarrinho = carrinho
-    .map((p) => (p.id === produtoId ? { ...p, quantidade: p.quantidade - 1 } : p))
+    .map((p) =>
+      p.id === produtoId ? { ...p, quantidade: p.quantidade - 1 } : p,
+    )
     .filter((p) => p.quantidade > 0);
 
   setCarrinho(novoCarrinho);
@@ -73,4 +75,13 @@ export function limparCarrinho() {
 
   setCarrinho([]);
   salvarCarrinho();
+}
+
+export function finalizarCompra() {
+  if (carrinho.length === 0) {
+    return alert("o carrinho esta vazio");
+  }
+  alert("compra realizada");
+  limparCarrinho();
+  document.dispatchEvent(new Event("estadoAtualizado"));
 }
