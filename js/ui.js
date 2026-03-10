@@ -32,7 +32,7 @@ export function renderizarProdutos(lista) {
     estoque.textContent = `Estoque: ${produto.estoque}`;
 
     const botao = document.createElement("button");
-    botao.classList.add("btnsCart");
+    botao.classList.add("btnsCart", "safeColor");
     if (produto.estoque > 0) {
       botao.textContent = "Adicionar ao carrinho";
     } else {
@@ -41,10 +41,10 @@ export function renderizarProdutos(lista) {
     }
 
     const btnModal = document.createElement("button");
-    btnModal.textContent = "Detalhes";
+    btnModal.textContent = "Detalhes...";
     btnModal.classList.add("btnsCart")
 
-    container.addEventListener("click", () => {
+    btnModal.addEventListener("click", () => {
       abrirModal(produto);
     });
 
@@ -56,7 +56,7 @@ export function renderizarProdutos(lista) {
 
     container.appendChild(nome);
     container.appendChild(preco);
-    container.appendChild(estoque);
+    // container.appendChild(estoque);
     container.appendChild(botao);
     container.appendChild(btnModal);
 
@@ -96,7 +96,7 @@ export function renderizarCarrinho() {
     item.quantidade === 1
       ? (botao.style.backgroundColor = botao.classList.add("dangerColor"))
       : " - ";
-    botao.classList.add("btnsCart");
+    botao.classList.add("btnsCart2");
     botao.addEventListener("click", () => {
       removerDoCarrinho(item.id);
       document.dispatchEvent(new Event("estadoAtualizado"));
@@ -105,7 +105,7 @@ export function renderizarCarrinho() {
     // Botão de adicionar/mais
     const botaoAdd = document.createElement("button");
     botaoAdd.textContent = "+";
-    botaoAdd.classList.add("btnsCart");
+    botaoAdd.classList.add("btnsCart2");
     if (produto.estoque <= 0) botaoAdd.disabled = true;
     botaoAdd.addEventListener("click", () => {
       adicionarProdutoNoCarrinho(item.id);
@@ -124,13 +124,14 @@ export function renderizarCarrinho() {
   // Botão limpar carrinho dentro do carrinho
   if (carrinho.length > 0) {
     const botaoLimpar = document.createElement("button");
-    botaoLimpar.classList.add("limpar-carrinho", "dangerColor");
+    botaoLimpar.classList.add("limpar-carrinho", "dangerColor", "btnsCart2");
     botaoLimpar.textContent = "Limpar carrinho";
     botaoLimpar.addEventListener("click", () => {
       limparCarrinho();
       document.dispatchEvent(new Event("estadoAtualizado"));
     });
-    listaDoCarrinho.appendChild(botaoLimpar);
+     listaDoCarrinho.appendChild(botaoLimpar);
+  
   }
 
   // Atualiza total

@@ -4,14 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <title>StoreTek</title>
   </head>
   <body>
-    
-      
     <header>
       <h1 id="logo">StoreTek</h1>
       <div class="search-container">
@@ -26,13 +27,18 @@
       </div>
     </header>
 
-    <h2>Produtos</h2>
-    <div id="lista-produtos">
-      
-    </div>
+    <div class="layout">
+      <div class="produtos">
+        <h2>Produtos</h2>
+        <div id="lista-produtos"></div>
+      </div>
 
-    <h2>Carrinho</h2>
-    <div id="lista-carrinho"></div>
+      <div class="carrinho">
+        <h2>Carrinho</h2>
+        <div id="lista-carrinho"></div>
+        <h3>Total: <span id="total">0</span></h3>
+      </div>
+    </div>
 
     <div id="modal-produto" class="modal hidden">
       <div class="modal-content">
@@ -41,11 +47,13 @@
         <p id="modal-preco"></p>
         <p id="modal-estoque"></p>
         <p id="modal-categoria"></p>
-        <button id="modal-add-carrinho">Adicionar ao carrinho</button>
+        <button id="modal-add-carrinho" class="btnsCart">
+          Adicionar ao carrinho
+        </button>
       </div>
     </div>
 
-    <h3>Total: <span id="total">0</span></h3>
+    
 
     <script type="module" src="js/app.js"></script>
   </body>
