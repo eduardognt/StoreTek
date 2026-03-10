@@ -9,6 +9,8 @@ const categoria = document.getElementById("modal-categoria");
 const btnFechar = document.getElementById("fechar-modal");
 const btnAddCartModal = document.getElementById("modal-add-carrinho");
 
+let produtoAtual = null;
+
 export function abrirModal(produto) {
   produtoAtual = produto;
 
@@ -17,12 +19,13 @@ export function abrirModal(produto) {
   estoque.textContent = `Estoque: ${produto.estoque}`;
   categoria.textContent = `Categoria: ${produto.categoria}`;
 
+  // reset do botão
+  btnAddCartModal.disabled = false;
+  btnAddCartModal.textContent = "Adicionar ao carrinho";
+
   if (produto.estoque <= 0) {
     btnAddCartModal.disabled = true;
     btnAddCartModal.textContent = "Produto indisponível";
-  } else {
-    btnAddCartModal.disabled = false;
-    btnAddCartModal.textContent = "Adicionar ao carrinho";
   }
 
   modal.classList.remove("hidden");
@@ -31,8 +34,6 @@ export function abrirModal(produto) {
 export function fecharModal() {
   modal.classList.add("hidden");
 }
-
-let produtoAtual = null;
 
 btnAddCartModal.addEventListener("click", () => {
   if (!produtoAtual) return;
