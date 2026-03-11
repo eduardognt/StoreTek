@@ -78,10 +78,17 @@ export function limparCarrinho() {
 }
 
 export function finalizarCompra() {
+  const total = calcularTotal();
+
   if (carrinho.length === 0) {
     return alert("o carrinho esta vazio");
   }
-  alert("compra realizada");
+  
+  const confirmou = confirm("Continuar para o pagamento?")
+  if (!confirmou) {
+    return;
+  }
+
   limparCarrinho();
   document.dispatchEvent(new Event("estadoAtualizado"));
 }
