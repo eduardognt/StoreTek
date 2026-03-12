@@ -85,6 +85,8 @@ header {
 .containerProdutos:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  border: 1px solid rgb(140, 189, 68);
+  background-color: rgba(141, 189, 68, 0.041);
 }
 
 /* CARRINHO */
@@ -101,6 +103,13 @@ header {
   border-radius: 8px;
   border: 1px solid rgba(212, 212, 212, 0.7);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.containerCarrinho:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  border: 1px solid rgb(189, 147, 68);
+  background-color: rgba(189, 147, 68, 0.041);
 }
 
 /* BOTÕES */

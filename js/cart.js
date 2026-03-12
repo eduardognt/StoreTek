@@ -78,13 +78,26 @@ export function limparCarrinho() {
 }
 
 export function finalizarCompra() {
-  const total = calcularTotal();
+  const total = calcularTotal().toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
 
   if (carrinho.length === 0) {
     return alert("o carrinho esta vazio");
   }
-  
-  const confirmou = confirm("Continuar para o pagamento?")
+    
+  const confirmou = confirm(`Continuar para o pagamento?
+Total: ${total}`);
+
+    const pedido = {
+      data: new Date(),
+      itens: carrinho,
+      total: total,
+    }
+
+    console.log(pedido)
+
   if (!confirmou) {
     return;
   }
