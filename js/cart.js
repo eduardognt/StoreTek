@@ -104,8 +104,6 @@ Total: ${total}`);
 
   localStorage.setItem("historicoCompras", JSON.stringify(historico));
 
-  console.log(historico);
-
   if (!confirmou) {
     return;
   }
