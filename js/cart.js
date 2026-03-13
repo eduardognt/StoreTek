@@ -1,6 +1,7 @@
 import { carrinho, setCarrinho } from "./state.js";
 import { buscarProdutoPorId } from "./products.js";
 import { salvarCarrinho } from "./storage.js";
+import { salvarPedido } from "./orders.js";
 
 export function adicionarProdutoNoCarrinho(produtoId) {
   const produto = buscarProdutoPorId(produtoId);
@@ -78,35 +79,33 @@ export function limparCarrinho() {
 }
 
 export function finalizarCompra() {
-  const total = calcularTotal().toLocaleString("pt-BR", {
+  const total = calcularTotal();
+  const totalFormatado = total.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
-  });
+  })
 
-  // if (carrinho.length === 0) {
-  //   return alert("o carrinho esta vazio");
-  // }
+  if (carrinho.length === 0) {
+    return alert("o carrinho esta vazio");
+  }
 
   const confirmou = confirm(`Continuar para o pagamento?
-Total: ${total}`);
+Total: ${totalFormatado}`);
 
-  let carrinhoPedido = [...carrinho];
+ if (!confirmou) {
+    return;
+  }
+
+  const carrinhoPedido = [...carrinho];
 
   const pedido = {
     data: new Date().toLocaleString(),
     itens: carrinhoPedido,
+    quantidadeItens: carrinhoPedido.length,
     total: total,
   };
-
-  let historico = JSON.parse(localStorage.getItem("historicoCompras")) || [];
-
-  historico.push(pedido);
-
-  localStorage.setItem("historicoCompras", JSON.stringify(historico));
-
-  if (!confirmou) {
-    return;
-  }
+  
+  salvarPedido(pedido);
 
   limparCarrinho();
   document.dispatchEvent(new Event("estadoAtualizado"));
