@@ -79,24 +79,32 @@ export function limparCarrinho() {
 
 export function finalizarCompra() {
   const total = calcularTotal().toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
+    style: "currency",
+    currency: "BRL",
+  });
 
-  if (carrinho.length === 0) {
-    return alert("o carrinho esta vazio");
-  }
-    
+  // if (carrinho.length === 0) {
+  //   return alert("o carrinho esta vazio");
+  // }
+
   const confirmou = confirm(`Continuar para o pagamento?
 Total: ${total}`);
 
-    const pedido = {
-      data: new Date(),
-      itens: carrinho,
-      total: total,
-    }
+  let carrinhoPedido = [...carrinho];
 
-    console.log(pedido)
+  const pedido = {
+    data: new Date().toLocaleString(),
+    itens: carrinhoPedido,
+    total: total,
+  };
+
+  let historico = JSON.parse(localStorage.getItem("historicoCompras")) || [];
+
+  historico.push(pedido);
+
+  localStorage.setItem("historicoCompras", JSON.stringify(historico));
+
+  console.log(historico);
 
   if (!confirmou) {
     return;
