@@ -207,3 +207,20 @@ p {
   }
 
 }
+
+.pedido-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 15px;
+  background: #fff;
+}
+
+.pedido-header {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.pedido-itens p {
+  margin: 4px 0;
+}

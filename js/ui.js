@@ -149,43 +149,50 @@ export function renderizarCarrinho() {
 export function renderizarHistorico() {
   const pedidos = getHistoricoCompras();
 
+  pedidos.sort((a, b) => b.timestamp - a.timestamp);
+
   const container = document.getElementById("lista-pedidos");
 
   container.innerHTML = "";
 
   pedidos.forEach((pedido) => {
-    const div = document.createElement("div");
+    const card = document.createElement("div");
+    card.classList.add("pedido-card");
+
+    const header = document.createElement("div");
+    header.classList.add("pedido-header");
 
     const info = document.createElement("p");
-
     info.textContent = `Pedido - ${pedido.data}`;
 
     const itens = document.createElement("p");
-
     itens.textContent = `Produtos no Carrinho: ${pedido.quantidadeItens}`;
 
     const total = document.createElement("p");
-
-      div.appendChild(info);
-
     total.textContent = `Total: ${pedido.total.toLocaleString("pt-BR", {
       style: "currency",
       currency: "BRL",
     })}`;
 
+    header.appendChild(info);
+    header.appendChild(itens);
+    header.appendChild(total);
+
+    const listaItens = document.createElement("div");
+    listaItens.classList.add("pedido-itens");
+
     pedido.itens.forEach((item) => {
       const produto = buscarProdutoPorId(item.id);
 
       const linhaItem = document.createElement("p");
-
       linhaItem.textContent = `${produto.nome} x${item.quantidade}`;
-      
-      div.appendChild(linhaItem);
-      div.appendChild(itens);
-      div.appendChild(total);
 
+      listaItens.appendChild(linhaItem);
     });
 
-    container.appendChild(div);
+    card.appendChild(header);
+    card.appendChild(listaItens);
+
+    container.appendChild(card);
   });
 }

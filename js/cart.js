@@ -100,6 +100,7 @@ Total: ${totalFormatado}`);
 
   const pedido = {
     data: new Date().toLocaleString(),
+    timestamp: Date.now(),
     itens: carrinhoPedido,
     quantidadeItens: carrinhoPedido.length,
     total: total,
