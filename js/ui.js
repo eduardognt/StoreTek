@@ -8,6 +8,7 @@ import {
 import { buscarProdutoPorId } from "./products.js";
 import { abrirModal } from "./modal.js";
 import { getHistoricoCompras } from "./orders.js";
+import { produtos } from "./data.js";
 
 // Renderiza a lista de produtos (recebe a lista filtrada do app.js)
 export function renderizarProdutos(lista) {
@@ -195,4 +196,17 @@ export function renderizarHistorico() {
 
     container.appendChild(card);
   });
+}
+
+export function atualizarContadorCarrinho() {
+
+  const totalDeItens = carrinho.reduce((acc, item) => {
+    return acc + item.quantidade
+    
+  },0)
+
+
+ const span = document.getElementById("contador-carrinho")
+ span.textContent = totalDeItens;
+ 
 }

@@ -83,7 +83,7 @@ export function finalizarCompra() {
   const totalFormatado = total.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
-  })
+  });
 
   if (carrinho.length === 0) {
     return alert("o carrinho esta vazio");
@@ -92,7 +92,7 @@ export function finalizarCompra() {
   const confirmou = confirm(`Continuar para o pagamento?
 Total: ${totalFormatado}`);
 
- if (!confirmou) {
+  if (!confirmou) {
     return;
   }
 
@@ -107,7 +107,6 @@ Total: ${totalFormatado}`);
   };
   
   salvarPedido(pedido);
-
   limparCarrinho();
   document.dispatchEvent(new Event("estadoAtualizado"));
 }

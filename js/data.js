@@ -28,4 +28,11 @@ export let produtos = [
     categoria: "periferico",
     estoque: 8,
   },
+  {
+    id: 6,
+    nome: "Headset Havit",
+    preco: 157,
+    categoria: "periferico",
+    estoque: 10,
+  },
 ];

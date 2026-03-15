@@ -1,6 +1,6 @@
 import { carregarCarrinho } from "./storage.js";
 import { recalcularEstoque, limparCarrinho } from "./cart.js";
-import { renderizarProdutos, renderizarCarrinho } from "./ui.js";
+import { renderizarProdutos, renderizarCarrinho, atualizarContadorCarrinho } from "./ui.js";
 import { buscarProdutos, filtrarPorCategoria } from "./filters.js";
 import { produtos } from "./data.js";
 import { finalizarCompra } from "./cart.js";
@@ -25,6 +25,8 @@ export function atualizarUI() {
   const listaFiltrada = aplicarFiltros();
   renderizarProdutos(listaFiltrada);
   renderizarCarrinho();
+  renderizarHistorico();
+  atualizarContadorCarrinho();
 }
 
 // Inicialização do app
