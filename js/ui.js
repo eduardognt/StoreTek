@@ -199,14 +199,13 @@ export function renderizarHistorico() {
 }
 
 export function atualizarContadorCarrinho() {
-
   const totalDeItens = carrinho.reduce((acc, item) => {
-    return acc + item.quantidade
-    
-  },0)
+    return acc + item.quantidade;
+  }, 0);
 
+  const span = document.getElementById("contador-carrinho");
 
- const span = document.getElementById("contador-carrinho")
- span.textContent = totalDeItens;
- 
+  if (!span) return;
+
+  span.textContent = ` (${totalDeItens})`;
 }
