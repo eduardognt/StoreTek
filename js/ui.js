@@ -8,7 +8,7 @@ import {
 import { buscarProdutoPorId } from "./products.js";
 import { abrirModal } from "./modal.js";
 import { getHistoricoCompras } from "./orders.js";
-import { produtos } from "./data.js";
+
 
 // Renderiza a lista de produtos (recebe a lista filtrada do app.js)
 export function renderizarProdutos(lista) {

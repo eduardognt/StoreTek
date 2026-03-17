@@ -2,6 +2,7 @@ import { carrinho, setCarrinho } from "./state.js";
 import { buscarProdutoPorId } from "./products.js";
 import { salvarCarrinho } from "./storage.js";
 import { salvarPedido } from "./orders.js";
+import { mostrarToast } from "./toast.js";
 
 export function adicionarProdutoNoCarrinho(produtoId) {
   const produto = buscarProdutoPorId(produtoId);
@@ -22,6 +23,7 @@ export function adicionarProdutoNoCarrinho(produtoId) {
 
   setCarrinho(novoCarrinho);
   salvarCarrinho();
+  mostrarToast("Produto adicionado no carrinho");
 }
 
 export function removerDoCarrinho(produtoId) {
@@ -36,8 +38,9 @@ export function removerDoCarrinho(produtoId) {
     )
     .filter((p) => p.quantidade > 0);
 
-  setCarrinho(novoCarrinho);
-  salvarCarrinho();
+    setCarrinho(novoCarrinho);
+    salvarCarrinho();
+    mostrarToast("Produto removido");
 }
 
 export function calcularTotal() {
@@ -76,6 +79,7 @@ export function limparCarrinho() {
 
   setCarrinho([]);
   salvarCarrinho();
+  mostrarToast("Carrinho limpo")
 }
 
 export function finalizarCompra() {
@@ -86,7 +90,7 @@ export function finalizarCompra() {
   });
 
   if (carrinho.length === 0) {
-    return alert("o carrinho esta vazio");
+    return mostrarToast("Carrinho vazio");
   }
 
   const confirmou = confirm(`Continuar para o pagamento?
@@ -108,5 +112,6 @@ Total: ${totalFormatado}`);
   
   salvarPedido(pedido);
   limparCarrinho();
+  mostrarToast("Compra efetuada com sucesso!")
   document.dispatchEvent(new Event("estadoAtualizado"));
 }
