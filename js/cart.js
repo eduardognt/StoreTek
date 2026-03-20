@@ -23,7 +23,7 @@ export function adicionarProdutoNoCarrinho(produtoId) {
 
   setCarrinho(novoCarrinho);
   salvarCarrinho();
-  mostrarToast("Produto adicionado no carrinho");
+  mostrarToast("Produto adicionado no carrinho", "succes");
 }
 
 export function removerDoCarrinho(produtoId) {
@@ -40,7 +40,7 @@ export function removerDoCarrinho(produtoId) {
 
     setCarrinho(novoCarrinho);
     salvarCarrinho();
-    mostrarToast("Produto removido");
+    mostrarToast("Produto removido", "warning");
 }
 
 export function calcularTotal() {
@@ -79,7 +79,7 @@ export function limparCarrinho() {
 
   setCarrinho([]);
   salvarCarrinho();
-  mostrarToast("Carrinho limpo")
+  mostrarToast("Carrinho limpo", "succes")
 }
 
 export function finalizarCompra() {
@@ -90,7 +90,7 @@ export function finalizarCompra() {
   });
 
   if (carrinho.length === 0) {
-    return mostrarToast("Carrinho vazio");
+    return mostrarToast("Carrinho vazio", "error");
   }
 
   const confirmou = confirm(`Continuar para o pagamento?
@@ -112,6 +112,6 @@ Total: ${totalFormatado}`);
   
   salvarPedido(pedido);
   limparCarrinho();
-  mostrarToast("Compra efetuada com sucesso!")
+  mostrarToast("Compra efetuada com sucesso!", "succes")
   document.dispatchEvent(new Event("estadoAtualizado"));
 }

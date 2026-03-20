@@ -1,13 +1,19 @@
-export function mostrarToast(msg) {
-  const toastContainer = document.getElementById("toast-container");
+const icones = {
+  success: "✔",
+  error: "✖",
+  warning: "⚠",
+};
 
+export function mostrarToast(msg, tipo = "success") {
+  const toastContainer = document.getElementById("toast-container");
   if (!toastContainer) return;
 
   const toastContent = document.createElement("div");
+  toastContent.classList.add("toast", tipo);
 
-  toastContent.classList.add("toast");
+  const icone = icones[tipo] || "✔";
 
-  toastContent.textContent = msg;
+  toastContent.textContent = `${icone} ${msg}`;
 
   toastContainer.appendChild(toastContent);
 
@@ -23,7 +29,4 @@ export function mostrarToast(msg) {
   setTimeout(() => {
     toastContent.remove();
   }, 1800);
-
-};
-
-
+}

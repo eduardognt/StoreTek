@@ -232,7 +232,6 @@ p {
 }
 
 .toast {
-  background: rgb(255, 254, 190);
   padding: 10px 15px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -250,4 +249,16 @@ p {
 .toast.hide {
   opacity: 0;
   transform: translateY(-10px);
+}
+
+.toast.succes{
+  background-color: rgb(141, 189, 68);
+}
+
+.toast.warning {
+  background-color: rgba(255, 255, 0, 0.664);
+}
+
+.toast.error{
+  background-color: rgba(250, 67, 67, 0.589);
 }
