@@ -9,7 +9,6 @@ import { buscarProdutoPorId } from "./products.js";
 import { abrirModal } from "./modal.js";
 import { getHistoricoCompras } from "./orders.js";
 
-
 // Renderiza a lista de produtos (recebe a lista filtrada do app.js)
 export function renderizarProdutos(lista) {
   const listaDosProdutos = document.querySelector("#lista-produtos");
@@ -162,6 +161,10 @@ export function renderizarHistorico() {
 
     const header = document.createElement("div");
     header.classList.add("pedido-header");
+    header.style.cursor = "pointer";
+    header.addEventListener("click", () => {
+      card.classList.toggle("aberto");
+    });
 
     const info = document.createElement("p");
     info.textContent = `Pedido - ${pedido.data}`;

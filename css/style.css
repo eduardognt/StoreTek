@@ -262,3 +262,17 @@ p {
 .toast.error{
   background-color: rgba(250, 67, 67, 0.589);
 }
+
+.pedido-itens {
+  display: none;
+}
+
+.pedido-card.aberto .pedido-itens {
+  display: block;
+}
+
+.pedido-card.aberto {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  border: 1px solid rgb(79, 108, 141);
+  background-color: rgba(68, 165, 189, 0.041);
+}
