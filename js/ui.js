@@ -170,7 +170,7 @@ export function renderizarHistorico() {
     info.textContent = `Pedido - ${pedido.data}`;
 
     const itens = document.createElement("p");
-    itens.textContent = `Produtos no Carrinho: ${pedido.quantidadeItens}`;
+    itens.textContent = `Produtos comprados: ${pedido.quantidadeItens}`;
 
     const total = document.createElement("p");
     total.textContent = `Total: ${pedido.total.toLocaleString("pt-BR", {
@@ -188,8 +188,16 @@ export function renderizarHistorico() {
     pedido.itens.forEach((item) => {
       const produto = buscarProdutoPorId(item.id);
 
+      const somaProdutos = item.quantidade * produto.preco;
+
       const linhaItem = document.createElement("p");
-      linhaItem.textContent = `${produto.nome} x${item.quantidade}`;
+      linhaItem.textContent = `${produto.nome} (x${item.quantidade}) - ${somaProdutos.toLocaleString(
+        "pt-BR",
+        {
+          style: "currency",
+          currency: "BRL",
+        },
+      )}`;
 
       listaItens.appendChild(linhaItem);
     });
