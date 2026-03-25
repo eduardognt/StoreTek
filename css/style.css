@@ -108,8 +108,8 @@ header {
 .containerCarrinho:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-  border: 1px solid rgb(140, 189, 68);
-  background-color: rgba(137, 189, 68, 0.041);
+  border: 1px solid rgba(233, 222, 65, 0.795);
+  background-color: rgba(229, 255, 0, 0.034);
 }
 
 /* BOTÕES */
@@ -275,6 +275,6 @@ p {
   display: block;
 }
 
-.pedido-card.aberto {
+/* .pedido-card.aberto {
 
-}
+} */
