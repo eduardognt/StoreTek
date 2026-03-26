@@ -23,6 +23,7 @@ export function atualizarUI() {
   const listaFiltrada = aplicarFiltros();
   renderizarProdutos(listaFiltrada);
   renderizarCarrinho();
+  renderizarHistorico();
   atualizarContadorCarrinho();
 }
 

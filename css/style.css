@@ -276,5 +276,18 @@ p {
 }
 
 /* .pedido-card.aberto {
-
+  background-color: gray;
 } */
+
+/* .historico {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+}
+
+#lista-pedidos {
+  background-color: gray;
+  width: 400px;
+}  */

@@ -153,15 +153,13 @@ export function renderizarHistorico() {
 
   const container = document.getElementById("lista-pedidos");
 
-  container.innerHTML = "";
+  if (pedidos.length === 0) {
+    const mensagem = document.createElement("p");
+    mensagem.textContent = "Nenhum pedido realizado ainda..."
 
-  // if (pedidos.length === 0) {
-  //   const mensagem = document.createElement("p");
-  //   mensagem.textContent = "Nenhum pedido realizado ainda..."
-
-  //   container.appendChild(mensagem);
-  //   return;
-  // }
+    container.appendChild(mensagem);
+    return;
+  }
  
   pedidos.forEach((pedido) => {
     const card = document.createElement("div");
@@ -219,9 +217,6 @@ export function renderizarHistorico() {
     container.appendChild(card);
   });
 }
-
-const btnHistorico = document.querySelector(".historico");
-btnHistorico.addEventListener("click", renderizarHistorico)
 
 export function atualizarContadorCarrinho() {
   const totalDeItens = carrinho.reduce((acc, item) => {

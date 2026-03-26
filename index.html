@@ -25,12 +25,8 @@
           <option value="periferico">Periferico</option>
         </select>
       </div>
-      <div class="historico">
-        <button>Minhas Compras</button>
-        <div id="lista-pedidos"></div>
-      </div>
     </header>
-
+    
     <div class="layout">
       <div class="produtos">
         <h2>Produtos</h2>
@@ -44,7 +40,7 @@
         <button id="btnFinalizar">Finalizar compra</button>
       </div>
     </div>
-
+    
     <div id="modal-produto" class="modal hidden">
       <div class="modal-content">
         <span id="fechar-modal" class="close">&times;</span>
@@ -57,8 +53,12 @@
         </button>
       </div>
     </div>
-
-
+    
+    <div class="historico">
+      <h3>Minhas Compras</h3>
+      <div id="lista-pedidos"></div>
+    </div>
+    
     <div id="toast-container"></div>
 
     <script type="module" src="js/app.js"></script>
