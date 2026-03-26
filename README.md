@@ -130,7 +130,7 @@ document.dispatchEvent(new Event("estadoAtualizado"));
 
 ## 📸 Preview
 
-
+![Preview](./print.PNG)
 
 ---
 
