@@ -153,14 +153,8 @@ export function renderizarHistorico() {
 
   const container = document.getElementById("lista-pedidos");
 
-  if (pedidos.length === 0) {
-    const mensagem = document.createElement("p");
-    mensagem.textContent = "Nenhum pedido realizado ainda..."
+  container.innerHTML = "";
 
-    container.appendChild(mensagem);
-    return;
-  }
- 
   pedidos.forEach((pedido) => {
     const card = document.createElement("div");
     card.classList.add("pedido-card");
@@ -194,8 +188,6 @@ export function renderizarHistorico() {
     pedido.itens.forEach((item) => {
       const produto = buscarProdutoPorId(item.id);
 
-      if (!produto) return;
-
       const somaProdutos = item.quantidade * produto.preco;
 
       const linhaItem = document.createElement("p");
@@ -212,7 +204,7 @@ export function renderizarHistorico() {
 
     card.appendChild(header);
     card.appendChild(listaItens);
-    
+
     container.appendChild(card);
   });
 }
@@ -228,4 +220,3 @@ export function atualizarContadorCarrinho() {
 
   span.textContent = ` (${totalDeItens})`;
 }
-
