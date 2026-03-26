@@ -155,6 +155,14 @@ export function renderizarHistorico() {
 
   container.innerHTML = "";
 
+  if (pedidos.length === 0) {
+    const msg = document.createElement("p");
+    msg.textContent = "Nenhum pedido realizado ainda";
+    msg.classList.add("historico-vazio");
+    container.appendChild(msg);
+    return;
+  }
+
   pedidos.forEach((pedido) => {
     const card = document.createElement("div");
     card.classList.add("pedido-card");

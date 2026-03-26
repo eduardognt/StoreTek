@@ -274,3 +274,9 @@ p {
 .pedido-card.aberto .pedido-itens {
   display: block;
 }
+
+.historico-vazio {
+  text-align: center;
+  color: #777;
+  margin-top: 20px;
+}
