@@ -23,6 +23,12 @@ export function renderizarProdutos(lista) {
     const container = document.createElement("div");
     container.classList.add("containerProdutos");
 
+    const card = document.createElement("div");
+    card.classList.add("produtos-card")
+
+    const img = document.createElement("img");
+    img.src = produto.imagem;
+
     const nome = document.createElement("h3");
     nome.textContent = produto.nome;
 
@@ -55,11 +61,14 @@ export function renderizarProdutos(lista) {
       document.dispatchEvent(new Event("estadoAtualizado"));
     });
 
-    container.appendChild(nome);
-    container.appendChild(preco);
+    card.appendChild(img);
+    card.appendChild(nome);
+    card.appendChild(preco);
     // container.appendChild(estoque);
-    container.appendChild(botao);
-    container.appendChild(btnModal);
+    card.appendChild(botao);
+    card.appendChild(btnModal);
+
+    container.appendChild(card);
 
     listaDosProdutos.appendChild(container);
   });

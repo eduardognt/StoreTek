@@ -10,7 +10,7 @@
 header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 20px;
   background-color: rgb(19, 26, 34);
   padding: 0 20px;
   height: 60px;
@@ -22,7 +22,7 @@ header {
 }
 
 #search-input {
-  width: 60%;
+  width: 400px;
   padding: 8px;
 }
 
@@ -45,6 +45,7 @@ header {
 
 .produtos {
   flex: 3;
+  text-align: center;
 }
 
 .carrinho {
@@ -65,12 +66,12 @@ header {
 .containerProdutos {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
 
   width: 280px;
-  height: 260px;
+  height: 300px;
 
   border-radius: 8px;
   border: 1px solid rgba(212, 212, 212, 0.7);
@@ -86,7 +87,6 @@ header {
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
   border: 1px solid rgb(79, 108, 141);
-  background-color: rgba(68, 165, 189, 0.041);
 }
 
 /* CARRINHO */
@@ -209,6 +209,7 @@ p {
 }
 
 .pedido-card {
+  
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 12px;
@@ -275,8 +276,18 @@ p {
   display: block;
 }
 
-.historico-vazio {
+/* .historico h3{
   text-align: center;
+} */
+
+.historico-vazio {
   color: #777;
   margin-top: 20px;
+}
+
+img {
+ width: 200px;
+height: 100px;
+object-fit: contain;
+border-radius: 8px;
 }
