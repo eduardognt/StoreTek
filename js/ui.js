@@ -212,8 +212,7 @@ export function renderizarHistorico() {
 
     card.appendChild(header);
     card.appendChild(listaItens);
-
-   
+    
     container.appendChild(card);
   });
 }

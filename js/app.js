@@ -66,3 +66,5 @@ document.addEventListener("estadoAtualizado", () => {
 const btnFinalizar = document.getElementById("btnFinalizar");
 
 btnFinalizar.addEventListener("click", finalizarCompra);
+
+renderizarHistorico();
