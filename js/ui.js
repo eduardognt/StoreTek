@@ -100,7 +100,7 @@ export function renderizarCarrinho() {
       currency: "BRL",
     })}`;
 
-    // Botão de remover/menos
+    // Botao de remover
     const botao = document.createElement("button");
     botao.textContent = item.quantidade === 1 ? "Remover Item" : "-";
     item.quantidade === 1
@@ -112,7 +112,7 @@ export function renderizarCarrinho() {
       document.dispatchEvent(new Event("estadoAtualizado"));
     });
 
-    // Botão de adicionar/mais
+    // Botao de adicionar
     const botaoAdd = document.createElement("button");
     botaoAdd.textContent = "+";
     botaoAdd.classList.add("btnsCart2");
@@ -131,7 +131,7 @@ export function renderizarCarrinho() {
     listaDoCarrinho.appendChild(containerCarrinho);
   });
 
-  // Botão limpar carrinho dentro do carrinho
+  // Botao limpar carrinho dentro do carrinho
   if (carrinho.length > 0) {
     const botaoLimpar = document.createElement("button");
     botaoLimpar.classList.add("limpar-carrinho", "dangerColor", "btnsCart2");
