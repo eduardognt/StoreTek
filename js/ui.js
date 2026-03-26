@@ -155,6 +155,14 @@ export function renderizarHistorico() {
 
   container.innerHTML = "";
 
+  // if (pedidos.length === 0) {
+  //   const mensagem = document.createElement("p");
+  //   mensagem.textContent = "Nenhum pedido realizado ainda..."
+
+  //   container.appendChild(mensagem);
+  //   return;
+  // }
+ 
   pedidos.forEach((pedido) => {
     const card = document.createElement("div");
     card.classList.add("pedido-card");
@@ -188,6 +196,8 @@ export function renderizarHistorico() {
     pedido.itens.forEach((item) => {
       const produto = buscarProdutoPorId(item.id);
 
+      if (!produto) return;
+
       const somaProdutos = item.quantidade * produto.preco;
 
       const linhaItem = document.createElement("p");
@@ -205,9 +215,13 @@ export function renderizarHistorico() {
     card.appendChild(header);
     card.appendChild(listaItens);
 
+   
     container.appendChild(card);
   });
 }
+
+const btnHistorico = document.querySelector(".historico");
+btnHistorico.addEventListener("click", renderizarHistorico)
 
 export function atualizarContadorCarrinho() {
   const totalDeItens = carrinho.reduce((acc, item) => {
@@ -220,3 +234,4 @@ export function atualizarContadorCarrinho() {
 
   span.textContent = ` (${totalDeItens})`;
 }
+

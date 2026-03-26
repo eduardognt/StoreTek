@@ -208,6 +208,13 @@ p {
 
 }
 
+.historico {
+  background-color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 8px;
+}
+
 .pedido-card {
   border: 1px solid #ccc;
   border-radius: 8px;

@@ -1,10 +1,8 @@
 import { carregarCarrinho } from "./storage.js";
-import { recalcularEstoque, limparCarrinho } from "./cart.js";
-import { renderizarProdutos, renderizarCarrinho, atualizarContadorCarrinho } from "./ui.js";
+import { recalcularEstoque, limparCarrinho, finalizarCompra } from "./cart.js";
+import { renderizarProdutos, renderizarCarrinho, atualizarContadorCarrinho, renderizarHistorico } from "./ui.js";
 import { buscarProdutos, filtrarPorCategoria } from "./filters.js";
 import { produtos } from "./data.js";
-import { finalizarCompra } from "./cart.js";
-import { renderizarHistorico } from "./ui.js";
 
 // Estado dos filtros
 const filtros = {
@@ -25,7 +23,6 @@ export function atualizarUI() {
   const listaFiltrada = aplicarFiltros();
   renderizarProdutos(listaFiltrada);
   renderizarCarrinho();
-  renderizarHistorico();
   atualizarContadorCarrinho();
 }
 
@@ -67,6 +64,4 @@ document.addEventListener("estadoAtualizado", () => {
 
 const btnFinalizar = document.getElementById("btnFinalizar");
 
-btnFinalizar.addEventListener("click", finalizarCompra)
-
-renderizarHistorico();
+btnFinalizar.addEventListener("click", finalizarCompra);
